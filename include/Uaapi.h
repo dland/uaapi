@@ -2,6 +2,6 @@
 #ifndef _UAAPI_H_
 # define _UAAPI_H_
 
-// Empty for now
+# include "Exception.h"
 
 #endif // _UAAPI_H_
