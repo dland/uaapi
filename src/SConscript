@@ -1,0 +1,45 @@
+# -*- python -*-
+
+import SCons.Errors
+
+Import("env")
+
+# Sources common to all platforms
+sources = env.Split("""
+Logger.cpp
+Log.cpp
+""")
+
+# Sources to be compiled only on posix platforms
+posixSources = env.Split("""
+""")
+
+# Sources to be compiled only on MS Windows platforms
+winSources = env.Split("""
+""")
+
+# Variable holding the dynamic libraries on which we depend
+libs = []
+
+# Append posix sources and add dependency for libdl and libpthread on
+# posix platforms
+if env["PLATFORM"] == "posix":
+    sources += posixSources
+    libs += ["dl", "pthread"]
+
+# Append MS Windows sources and add dependency for Ws2_32.dll on MS
+# Windows platforms
+elif env["PLATFORM"] == "win32":
+    sources += winSources
+    libs += ["Ws2_32"]
+
+# Other platforms are not supported yet
+else:
+    raise SCons.Errors.UserError("Unsupported platform.")
+
+# Build
+dlFiles = env.SharedLibrary(target = "uaapi",
+                            source = sources,
+                            LIBS = libs)
+
+Return("dlFiles")

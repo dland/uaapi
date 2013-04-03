@@ -1,0 +1,12 @@
+# -*- python -*-
+
+# This SConstruct will only build the Uaapi
+
+import os.path
+
+env = Environment()
+
+dlFiles = SConscript("SConscript")
+for dlFile in dlFiles:
+    env.Command(os.path.basename(str(dlFile)), str(dlFile),
+                Copy("$TARGET", "$SOURCE"))
