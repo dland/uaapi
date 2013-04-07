@@ -12,6 +12,8 @@ Log.cpp
 
 # Sources to be compiled only on posix platforms
 posixSources = env.Split("""
+dynlib/PosixDlLoader.cpp
+dynlib/PosixDynamicLibrary.cpp
 """)
 
 # Sources to be compiled only on MS Windows platforms
