@@ -19,6 +19,9 @@ dynlib/PosixDynamicLibrary.cpp
 # Sources to be compiled only on MS Windows platforms
 winSources = env.Split("""
 WinClass.cpp
+
+dynlib/WindowsDlLoader.cpp
+dynlib/WindowsDynamicLibrary.cpp
 """)
 
 # Variable holding the dynamic libraries on which we depend
