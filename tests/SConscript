@@ -1,0 +1,28 @@
+# -*- python -*-
+
+# SConscript to build the tests
+
+env = Environment()
+tests = []
+
+env["LIBPATH"] = "#/"
+env["CPPPATH"] = "#/include"
+
+env["CPPDEFINES"] = [env["PLATFORM"].upper()]
+
+# Exception
+tests.append(env.Program(target="exception_test",
+                         source="exception_test.cpp",
+                         LIBS="uaapi"))
+
+# Logger
+tests.append(env.Program(target="logger_test",
+                         source="logger_test.cpp",
+                         LIBS="uaapi"))
+
+# Singleton
+tests.append(env.Program(target="singleton_test",
+                         source="singleton_test.cpp",
+                         LIBS="uaapi"))
+
+Return("tests")

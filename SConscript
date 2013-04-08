@@ -18,5 +18,5 @@ elif env["PLATFORM"] == "posix":
 
 Export("env")
 
-dlFiles = SConscript("src/SConscript")
-Return("dlFiles")
+dlFile = SConscript("src/SConscript")
+Return("dlFile")
