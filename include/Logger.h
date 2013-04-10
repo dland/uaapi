@@ -53,10 +53,7 @@ namespace Uaapi
         _dldecl std::ostream& _log(Log::Level level);
 
     public:
-        Log()
-            : _stream(std::ostringstream::out),
-              _logLevel(Log::L_NONE)
-        {}
+        _dldecl Log();
         _dldecl ~Log();
 
         _dldecl std::ostream& e();

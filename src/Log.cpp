@@ -11,6 +11,11 @@ namespace Uaapi
         ""
     };
 
+    Log::Log()
+        : _stream(std::ostringstream::out),
+          _logLevel(Log::L_NONE)
+    {}
+
     Log::~Log()
     {
         _stream << std::endl;
