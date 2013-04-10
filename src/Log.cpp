@@ -38,10 +38,7 @@ namespace Uaapi
     {
         _logLevel = level;
 
-        _stream
-            << "["
-            << _prefixes[level]
-            << "] ";
+        _stream << "[" << _prefixes[level] << "] ";
         return _stream;
     }
 
