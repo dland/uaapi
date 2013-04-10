@@ -7,14 +7,23 @@ import os.path
 env = Environment()
 
 # Build the Uaapi
-dlFile = SConscript("SConscript")
-copyCmd = env.Command(os.path.basename(str(dlFile)), str(dlFile),
-                      Copy("$TARGET", "$SOURCE"))
-env.Alias("uaapi", copyCmd)
+dlFiles = SConscript("SConscript")
+
+copyTgts = []
+for dlFile in dlFiles:
+    copyTgts.append(env.Command(os.path.basename(str(dlFile)), str(dlFile),
+                                Copy("$TARGET", "$SOURCE")))
+
+uaapiTgt = env.Alias("uaapi", copyTgts)
 
 # Build the tests
 tests = SConscript("tests/SConscript")
-env.Alias("tests", tests)
+
+# Dependency of tests on uaapi explicitly specified so that, on the MS
+# Windows platform, the copy of each dlFiles is done, not only
+# uaapi.lib
+env.Depends(tests, uaapiTgt)
+testsTgt = env.Alias("tests", tests)
 
 # Only build the uaapi if no explicit target is given
 env.Default("uaapi")

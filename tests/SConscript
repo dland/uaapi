@@ -10,7 +10,14 @@ env["CPPPATH"] = "#/include"
 
 env["CPPDEFINES"] = [env["PLATFORM"].upper()]
 
-# Exception
+if env["PLATFORM"] == "win32":
+    env["CCFLAGS"].append("/EHsc")
+    env["CCFLAGS"].append("/W3")
+
+elif env["PLATFORM"] == "posix":
+    env["CCFLAGS"].append("-g")
+
+# # Exception
 tests.append(env.Program(target="exception_test",
                          source="exception_test.cpp",
                          LIBS="uaapi"))
@@ -20,7 +27,7 @@ tests.append(env.Program(target="logger_test",
                          source="logger_test.cpp",
                          LIBS="uaapi"))
 
-# Singleton
+# # Singleton
 tests.append(env.Program(target="singleton_test",
                          source="singleton_test.cpp",
                          LIBS="uaapi"))

@@ -13,10 +13,11 @@ env["CPPDEFINES"] = [env["PLATFORM"].upper(), "UAAPI_EXPORT"]
 
 if env["PLATFORM"] == "win32":
     env["CCFLAGS"].append("/EHsc")
+    env["CCFLAGS"].append("/W3")
 elif env["PLATFORM"] == "posix":
     env["CCFLAGS"].append("-g")
 
 Export("env")
 
-dlFile = SConscript("src/SConscript")
-Return("dlFile")
+dlFiles = SConscript("src/SConscript")
+Return("dlFiles")

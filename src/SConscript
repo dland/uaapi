@@ -44,9 +44,8 @@ else:
     raise SCons.Errors.UserError("Unsupported platform.")
 
 # Build
-dlFileNodes = env.SharedLibrary(target = "uaapi",
+dlFiles = env.SharedLibrary(target = "uaapi",
                                 source = sources,
                                 LIBS = libs)
-dlFile = dlFileNodes[0]
 
-Return("dlFile")
+Return("dlFiles")

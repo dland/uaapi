@@ -19,12 +19,12 @@
 
 #  include <string>
 
-DLL_EXTERN template class _dldecl std::allocator< char >;
-DLL_EXTERN template class _dldecl std::basic_string<
-    char,
-    std::char_traits< char >,
-    std::allocator< char >
-    >;
+// DLL_EXTERN template class _dldecl std::allocator< char >;
+// DLL_EXTERN template class _dldecl std::basic_string<
+//     char,
+//     std::char_traits< char >,
+//     std::allocator< char >
+//     >;
 
 #  pragma warning(pop)
 
