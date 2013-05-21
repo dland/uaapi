@@ -15,4 +15,6 @@
 #  error "Unhandeled build environment."
 # endif
 
+# include "dynlib/PluginLoader.hpp"
+
 #endif // _DYNLIB_H_
