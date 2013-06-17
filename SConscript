@@ -4,7 +4,7 @@
 # dynamic libraries (1 for now).
 # Call this SConscript in your SConstruct file
 
-env = Environment()
+env = Environment(TARGET_ARCH="x86")
 
 includeDir = Dir("include/")
 
