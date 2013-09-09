@@ -31,6 +31,31 @@ namespace Uaapi
     class LoggerImpl;
     typedef SingletonHolder<LoggerImpl> Logger;
 
+    /**
+     * Represent a single log message. Do not instanciate directly,
+     * use the ulog(LEVEL) macro instead.
+     *
+     * A log message can have 4 different levels: ERROR, WARN, DEBUG
+     * and INFO.
+     *
+     * A log element behaves like a stream. e.g:
+     *     ulog(ERROR) << "A Message " << 42;
+     *
+     * At the end of the statement, the logger will print recored the
+     * message.
+     *
+     * The logger can be controlled through the static methods
+     * Log::failOnError(), Log::logTo(), Log::getMinLogLevel() and
+     * Log::setMinLogLevel().
+     *
+     * If the logger is instructed to "fail on error", logs with the
+     * ERROR level will instead have a FATAL level.
+     *
+     * Logger has a minimum log level (default to WARN). Any messages
+     * with a level under it will not be logged. Use the
+     * Log::getMinLogLevel() and Log::setMinLogLevel() to control the
+     * minimum log level.
+     */
     class Log
     {
     public:
@@ -70,12 +95,45 @@ namespace Uaapi
         ** Providing direct acces to Uaapi::Logger to the Uaapi user
         ** will result in 2 existing instances of the Singleton...
         */
+
+        /**
+         * @brief Control if program should abort on ERROR log.
+         *
+         * @param fail If true, abort on ERROR log messages.
+         */
         _dldecl static void failOnError(bool fail);
+
+        /**
+         * @brief Control where the logger should output each
+         * messages.
+         *
+         * @param fileName Filename on which messages should be
+         * logged.
+         *
+         * @param mode Control how the file shoud be open.
+         */
         _dldecl static void logTo(
             const std::string& fileName,
             std::ios_base::openmode mode = std::ios_base::out);
+
+        /**
+         * @brief Control where the logger should output each
+         * messages.
+         *
+         * @param stream Stream on which messages should be logged.
+         */
         _dldecl static void logTo(std::ostream& stream);
+
+        /**
+         * @brief Get the minimum log level.
+         */
         _dldecl static Log::Level getMinLogLevel();
+
+        /**
+         * @brief Set the minimum log level.
+         *
+         * @param Minimum log level.
+         */
         _dldecl static void setMinLogLevel(Log::Level level);
     };
 
